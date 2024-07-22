@@ -11,8 +11,9 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	@NotBlank(message = "Name is mandatory")
 	@Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
 	private String name;
@@ -21,7 +22,11 @@ public class User {
 	@Email(message = "Email should be valid")
 	private String email;
 
-	public Long getId() {
+	@NotBlank(message = "Password is mandatory")
+	@Size(min = 6, message = "Password must be at least 6 characters long")
+	private String password;
+
+	Long getId() {
 		return id;
 	}
 
@@ -43,6 +48,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
